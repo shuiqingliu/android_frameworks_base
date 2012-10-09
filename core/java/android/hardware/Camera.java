@@ -3842,4 +3842,7 @@ public class Camera {
             return false;
         }
     };
+
+    // Allwinner platform - set video screen
+    public static native int setCameraScreen(int screen);
 }

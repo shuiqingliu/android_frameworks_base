@@ -95,6 +95,7 @@ import com.android.systemui.statusbar.NotificationData;
 import com.android.systemui.statusbar.NotificationData.Entry;
 import com.android.systemui.statusbar.SignalClusterView;
 import com.android.systemui.statusbar.StatusBarIconView;
+import com.android.systemui.statusbar.policy.DisplayController;
 import com.android.systemui.statusbar.policy.BatteryController;
 import com.android.systemui.statusbar.policy.DockBatteryController;
 import com.android.systemui.statusbar.policy.BluetoothController;
@@ -166,6 +167,7 @@ public class PhoneStatusBar extends BaseStatusBar {
     DockBatteryController mDockBatteryController;
     LocationController mLocationController;
     NetworkController mNetworkController;
+    DisplayController mDisplayController;
 
     private boolean mHasDockBattery;
 
@@ -624,6 +626,7 @@ public class PhoneStatusBar extends BaseStatusBar {
             if (v != null) mStatusBarView.removeView(v);
         }
 
+        mDisplayController = new DisplayController(mContext);
         mNetworkController = new NetworkController(mContext);
         mBluetoothController = new BluetoothController(mContext);
         final SignalClusterView signalCluster =
