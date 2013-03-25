@@ -2015,22 +2015,18 @@ public class WifiStateMachine extends StateMachine {
              */
             new Thread(new Runnable() {
                 public void run() {
-		    boolean ret = false;
-
                     mWakeLock.acquire();
                     //enabling state
                     switch(message.arg1) {
                         case WIFI_STATE_ENABLING:
                             setWifiState(WIFI_STATE_ENABLING);
-			    ret = mWifiNative.loadDriver();
                             break;
                         case WIFI_AP_STATE_ENABLING:
                             setWifiApState(WIFI_AP_STATE_ENABLING);
-			    ret = mWifiNative.loadHotspotDriver();
                             break;
                     }
 
-                    if(ret) {
+                    if(mWifiNative.loadDriver()) {
                         if (DBG) log("Driver load successful");
                         sendMessage(CMD_LOAD_DRIVER_SUCCESS);
                     } else {
@@ -2145,21 +2141,9 @@ public class WifiStateMachine extends StateMachine {
             message.copyFrom(getCurrentMessage());
             new Thread(new Runnable() {
                 public void run() {
-		    boolean ret = false;
-
                     if (DBG) log(getName() + message.toString() + "\n");
                     mWakeLock.acquire();
-		    switch(message.arg1) {
-                       case WIFI_STATE_DISABLED:
-                       case WIFI_STATE_UNKNOWN:
-		           ret = mWifiNative.unloadDriver();
-                           break;
-                       case WIFI_AP_STATE_DISABLED:
-                       case WIFI_AP_STATE_FAILED:
-		           ret = mWifiNative.unloadHotspotDriver();
-                           break;
-		    }
-                    if(ret) {
+                    if(mWifiNative.unloadDriver()) {
                         if (DBG) log("Driver unload successful");
                         sendMessage(CMD_UNLOAD_DRIVER_SUCCESS);
 
