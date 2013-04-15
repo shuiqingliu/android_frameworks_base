@@ -107,7 +107,10 @@ public class LegacyUsbDeviceManager extends UsbDeviceManager {
     private boolean mUseUsbNotification;
     private boolean mAdbEnabled;
     private boolean mLegacy = false;
+<<<<<<< HEAD
     private boolean mHasUsbService = false;
+=======
+>>>>>>> cyanogen/cm-10.1
     private UsbDebuggingManager mDebuggingManager;
 
     private class AdbSettingsObserver extends ContentObserver {
@@ -747,6 +750,5 @@ public class LegacyUsbDeviceManager extends UsbDeviceManager {
             mDebuggingManager.dump(fd, pw);
         }
     }
-
 
 }
