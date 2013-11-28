@@ -2775,7 +2775,7 @@ public class PowerManagerService extends IPowerManager.Stub
             }
             // This is the range of brightness values that we can use.
             final int minval = values[0];
-            final int maxval = values[mAutoBrightnessLevels.length];
+            final int maxval = values[values.length - 1];
             if (minval > maxval) {
                 // this is a button or keyboard brightness where brightness
                 // is in reversed order to sensor values
